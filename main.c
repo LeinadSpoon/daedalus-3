@@ -1,4 +1,12 @@
+/**************************
+ * main.c
+ * (c) 2013 Daniel Burgener
+ * Main game loop
+ **************************/
+
 #include <ncurses.h>
+
+#include "map.h"
 
 int main()
 {
@@ -11,8 +19,10 @@ int main()
 	clear();
 	noecho();
 	cbreak();
+	map_t *cur_map = gen_map();
 	while(running) {
 		clear();
+		print_map(*cur_map);
 		mvprintw(yLoc,xLoc,"@");
 		refresh();
 		c = getch();
