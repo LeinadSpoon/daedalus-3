@@ -14,6 +14,8 @@ int main()
 	int c;
 	int xLoc = 30;
 	int yLoc = 10;
+	int xMov = 0;
+	int yMov = 0;
 
 	initscr();
 	clear();
@@ -30,21 +32,45 @@ int main()
 			case 'q':
 				running = 0;
 				break;
+			case 'y':
+				xMov = -1;
+				yMov = -1;
+				break;
+			case 'u':
+				xMov = 1;
+				yMov = -1;
+				break;
 			case 'h':
-				xLoc -= 1;
+				xMov = -1;
 				break;
 			case 'j':
-				yLoc -= 1;
+				yMov = -1;
 				break;
 			case 'k':
-				yLoc += 1;
+				yMov = 1;
 				break;
 			case 'l':
-				xLoc += 1;
+				xMov = 1;
+				break;
+			case 'b':
+				xMov = -1;
+				yMov = 1;
+				break;
+			case 'n':
+				xMov = 1;
+				yMov = 1;
 				break;
 			default:
-				break;
-		}		
+				continue;
+		}
+		if (xMov != 0 || yMov != 0) {
+			if ((*cur_map)[yLoc+yMov][xLoc+xMov].passable) {
+				xLoc += xMov;
+				yLoc += yMov;
+				xMov = 0;
+				yMov = 0;
+			}
+		}
 	}
 	endwin();
 	return 0;

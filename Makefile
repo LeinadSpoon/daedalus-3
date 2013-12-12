@@ -1,6 +1,6 @@
-DEBUG ?= 0
+DEBUG?=0
 
-ifeq (DEBUG, 1)
+ifeq (${DEBUG}, 1)
 	CFLAGS=-g --std=c99
 else
 	CFLAGS=-O2 --std=c99
