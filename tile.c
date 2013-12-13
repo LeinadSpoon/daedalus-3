@@ -6,5 +6,7 @@
 
 #include "tile.h"
 
-const tile_t WALL = {0,'#'};
-const tile_t FLOOR = {1,'.'};
+const tile_t WALL_TILE = {0,'#',WALL};
+const tile_t FLOOR_TILE = {1,'.',FLOOR};
+const tile_t OPEN_DOOR_TILE = {1,'\'',OPEN_DOOR};
+const tile_t CLOSED_DOOR_TILE = {0,'+',CLOSED_DOOR};

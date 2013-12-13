@@ -7,6 +7,7 @@
 #include <ncurses.h>
 
 #include "map.h"
+#include "interact.h"
 
 int main()
 {
@@ -40,6 +41,9 @@ int main()
 				xMov = 1;
 				yMov = -1;
 				break;
+			case 'o':
+				open_door(cur_map,xLoc,yLoc);
+				break;
 			case 'h':
 				xMov = -1;
 				break;
@@ -51,6 +55,9 @@ int main()
 				break;
 			case 'l':
 				xMov = 1;
+				break;
+			case 'c':
+				close_door(cur_map,xLoc,yLoc);
 				break;
 			case 'b':
 				xMov = -1;
@@ -67,9 +74,9 @@ int main()
 			if ((*cur_map)[yLoc+yMov][xLoc+xMov].passable) {
 				xLoc += xMov;
 				yLoc += yMov;
-				xMov = 0;
-				yMov = 0;
 			}
+			xMov = 0;
+			yMov = 0;
 		}
 	}
 	endwin();
