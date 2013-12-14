@@ -8,7 +8,8 @@ endif
 
 TILE_DEPS = src/tile.h
 MAP_DEPS = src/map.h ${TILE_DEPS}
-INTERACT_DEPS = src/interact.h ${MAP_DEPS} ${TILE_DEPS}
+LOG_DEPS = src/log.h
+INTERACT_DEPS = src/interact.h ${MAP_DEPS} ${TILE_DEPS} ${LOG_DEPS}
 MAIN_DEPS = ${MAP_DEPS} ${TILE_DEPS} ${INTERACT_DEPS}
 
 all: rougelike
@@ -22,11 +23,14 @@ src/map.o: src/map.c ${MAP_DEPS}
 src/tile.o: src/tile.c ${TILE_DEPS}
 	gcc -c ${CFLAGS} src/tile.c -o src/tile.o
 
+src/log.o: src/log.c ${LOG_DEPS}
+	gcc -c ${CFLAGS} src/log.c -o src/log.o
+
 src/interact.o: src/interact.c ${INTERACT_DEPS}
 	gcc -c ${CFLAGS} src/interact.c -o src/interact.o
 
-rougelike: src/main.o src/map.o src/tile.o src/interact.o
-	gcc -lncurses src/tile.o src/interact.o src/map.o src/main.o -o rougelike
+rougelike: src/main.o src/map.o src/tile.o src/interact.o src/log.o
+	gcc -lncurses src/tile.o src/log.o src/interact.o src/map.o src/main.o -o rougelike
 
 clean:
-	rm rougelike src/*.o
+	rm -f rougelike src/*.o

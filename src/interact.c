@@ -6,6 +6,7 @@
 
 #include "interact.h"
 #include "ncurses.h"
+#include "log.h"
 
 static void get_adjacent_target(int xPos_in, int yPos_in, int *xPos_out, int *yPos_out)
 {
@@ -52,11 +53,15 @@ static void get_adjacent_target(int xPos_in, int yPos_in, int *xPos_out, int *yP
 
 void open_door(map_t *cur_map, int xPos, int yPos)
 {
+	gamelog("open door called with %d and %d\n",xPos, yPos);
 	int xTar,yTar;
 
 	get_adjacent_target(xPos,yPos,&xTar,&yTar);
-	if ((*cur_map)[xTar][yTar].type == CLOSED_DOOR) {
-		(*cur_map)[xTar][yTar] = OPEN_DOOR_TILE;
+
+	gamelog("The adjacent target was %d and %d\n",xTar, yTar);
+
+	if ((*cur_map)[yTar][xTar].type == CLOSED_DOOR) {
+		(*cur_map)[yTar][xTar] = OPEN_DOOR_TILE;
 	}
 }
 
@@ -65,7 +70,7 @@ void close_door(map_t *cur_map, int xPos, int yPos)
 	int xTar,yTar;
 
 	get_adjacent_target(xPos,yPos,&xTar,&yTar);
-	if ((*cur_map)[xTar][yTar].type == OPEN_DOOR) {
-		(*cur_map)[xTar][yTar] = CLOSED_DOOR_TILE;
+	if ((*cur_map)[yTar][xTar].type == OPEN_DOOR) {
+		(*cur_map)[yTar][xTar] = CLOSED_DOOR_TILE;
 	}
 }
