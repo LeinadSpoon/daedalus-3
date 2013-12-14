@@ -6,27 +6,27 @@ else
 	CFLAGS=-O2 --std=c99
 endif
 
-TILE_DEPS = tile.h
-MAP_DEPS = map.h ${TILE_DEPS}
-INTERACT_DEPS = interact.h ${MAP_DEPS} ${TILE_DEPS}
+TILE_DEPS = src/tile.h
+MAP_DEPS = src/map.h ${TILE_DEPS}
+INTERACT_DEPS = src/interact.h ${MAP_DEPS} ${TILE_DEPS}
 MAIN_DEPS = ${MAP_DEPS} ${TILE_DEPS} ${INTERACT_DEPS}
 
 all: rougelike
 
-main.o: main.c ${MAIN_DEPS}
-	gcc -c ${CFLAGS} main.c
+src/main.o: src/main.c ${MAIN_DEPS}
+	gcc -c ${CFLAGS} src/main.c -o src/main.o
 
-map.o: map.c ${MAP_DEPS}
-	gcc -c ${CFLAGS} map.c
+src/map.o: src/map.c ${MAP_DEPS}
+	gcc -c ${CFLAGS} src/map.c -o src/map.o
 
-tile.o: tile.c ${TILE_DEPS}
-	gcc -c ${CFLAGS} tile.c
+src/tile.o: src/tile.c ${TILE_DEPS}
+	gcc -c ${CFLAGS} src/tile.c -o src/tile.o
 
-interact.o: interact.c ${INTERACT_DEPS}
-	gcc -c ${CFLAGS} interact.c
+src/interact.o: src/interact.c ${INTERACT_DEPS}
+	gcc -c ${CFLAGS} src/interact.c -o src/interact.o
 
-rougelike: main.o map.o tile.o interact.o
-	gcc -lncurses tile.o interact.o map.o main.o -o rougelike
+rougelike: src/main.o src/map.o src/tile.o src/interact.o
+	gcc -lncurses src/tile.o src/interact.o src/map.o src/main.o -o rougelike
 
 clean:
-	rm rougelike *.o
+	rm rougelike src/*.o
