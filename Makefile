@@ -1,9 +1,13 @@
+OBJS = src/tile.o src/log.o src/interact.o src/map.o src/main.o
+
 DEBUG?=0
 
+CFLAGS=--std=c99 -Wall -fstack-protector-strong
+
 ifeq (${DEBUG}, 1)
-	CFLAGS=-g --std=c99
+	CFLAGS+=-g
 else
-	CFLAGS=-O2 --std=c99
+	CFLAGS+=-O2
 endif
 
 TILE_DEPS = src/tile.h
@@ -29,8 +33,8 @@ src/log.o: src/log.c ${LOG_DEPS}
 src/interact.o: src/interact.c ${INTERACT_DEPS}
 	gcc -c ${CFLAGS} src/interact.c -o src/interact.o
 
-rougelike: src/main.o src/map.o src/tile.o src/interact.o src/log.o
-	gcc -lncurses src/tile.o src/log.o src/interact.o src/map.o src/main.o -o rougelike
+rougelike: ${OBJS}
+	gcc -lncurses ${OBJS} -o rougelike
 
 clean:
 	rm -f rougelike src/*.o
