@@ -1,4 +1,4 @@
-OBJS = src/tile.o src/log.o src/interact.o src/map.o src/main.o
+OBJS = src/tile.o src/log.o src/items.o src/interact.o src/map.o src/main.o
 
 DEBUG?=0
 
@@ -13,6 +13,7 @@ endif
 TILE_DEPS = src/tile.h
 MAP_DEPS = src/map.h ${TILE_DEPS}
 LOG_DEPS = src/log.h
+ITEMS_DEPS = src/items.h
 INTERACT_DEPS = src/interact.h ${MAP_DEPS} ${TILE_DEPS} ${LOG_DEPS}
 MAIN_DEPS = ${MAP_DEPS} ${TILE_DEPS} ${INTERACT_DEPS}
 
@@ -29,6 +30,9 @@ src/tile.o: src/tile.c ${TILE_DEPS}
 
 src/log.o: src/log.c ${LOG_DEPS}
 	gcc -c ${CFLAGS} src/log.c -o src/log.o
+
+src/items.o: src/items.c ${ITEMS_DEPS}
+	gcc -c ${CFLAGS} src/items.c -o src/items.o
 
 src/interact.o: src/interact.c ${INTERACT_DEPS}
 	gcc -c ${CFLAGS} src/interact.c -o src/interact.o
