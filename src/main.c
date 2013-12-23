@@ -48,10 +48,10 @@ int main()
 				xMov = -1;
 				break;
 			case 'j':
-				yMov = -1;
+				yMov = 1;
 				break;
 			case 'k':
-				yMov = 1;
+				yMov = -1;
 				break;
 			case 'l':
 				xMov = 1;
