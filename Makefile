@@ -42,7 +42,7 @@ src/interact.o: src/interact.c ${INTERACT_DEPS}
 	gcc -c ${CFLAGS} src/interact.c -o src/interact.o
 
 rougelike: ${OBJS}
-	gcc -lncurses ${OBJS} -o rougelike
+	gcc -lncurses ${OBJS} -o daedalus-3
 
 clean:
-	rm -f rougelike src/*.o
+	rm -f daedalus-3 src/*.o
